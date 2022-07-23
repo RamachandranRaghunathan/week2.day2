@@ -1,0 +1,72 @@
+package week2.day1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class DuplicateLead {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver= new ChromeDriver();
+		driver.get("http://leaftaps.com/opentaps/control/login");
+		driver.findElement(By.id("username")).sendKeys("Demosalesmanager");
+		driver.findElement(By.id("password")).sendKeys("crmsfa");
+		driver.findElement(By.className("decorativeSubmit")).click();
+		driver.findElement(By.linkText("CRM/SFA")).click();
+		driver.findElement(By.linkText("Leads")).click();
+		driver.findElement(By.linkText("Create Lead")).click();
+		driver.findElement(By.id("createLeadForm_companyName")).sendKeys("TATA CONSULTANCY SERVICES");
+		driver.findElement(By.id("createLeadForm_firstName")).sendKeys("RAMACHANDRAN");
+		driver.findElement(By.id("createLeadForm_lastName")).sendKeys("R");
+		driver.findElement(By.id("createLeadForm_firstNameLocal")).sendKeys("ABC");
+		driver.findElement(By.id("createLeadForm_departmentName")).sendKeys("TESTING");
+		driver.findElement(By.id("createLeadForm_description")).sendKeys("Creating new lead");
+		driver.findElement(By.id("createLeadForm_primaryEmail")).sendKeys("rama654@gmail.com");
+		Select state= new Select (driver.findElement(By.id("createLeadForm_generalStateProvinceGeoId")));
+		state.selectByVisibleText("New York");
+		driver.findElement(By.className("smallSubmit")).click();
+		
+		String title = driver.getTitle();
+		System.out.println(title);
+		
+		// Click duplicate button
+		
+		driver.findElement(By.linkText("Duplicate Lead")).click();
+		
+		WebElement select1 = driver.findElement(By.id("createLeadForm_companyName"));
+		select1.clear();
+		select1.sendKeys("HCL");
+		
+		WebElement select2 = driver.findElement(By.id("createLeadForm_firstName"));
+		select2.clear();
+		select2.sendKeys("RR");
+		
+		WebElement select3 = driver.findElement(By.id("createLeadForm_lastName"));
+		select3.clear();
+		select3.sendKeys("33");
+		
+		driver.findElement(By.className("smallSubmit")).click();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}
